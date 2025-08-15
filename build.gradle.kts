@@ -36,6 +36,12 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 
+    implementation("org.springframework.retry:spring-retry")
+
+    implementation("io.github.cdimascio:dotenv-java:3.0.0")
+
+    implementation("org.liquibase:liquibase-core")
+
 }
 
 tasks.test {
