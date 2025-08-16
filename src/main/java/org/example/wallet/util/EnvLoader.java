@@ -6,8 +6,10 @@ public class EnvLoader {
     public static void loadEnv() {
         Dotenv dotenv = Dotenv.load();
         dotenv.entries().forEach(entry -> {
-            System.getProperty(entry.getKey(), entry.getValue());
-            System.out.println("Loaded env: " + entry.getKey() + "=" + entry.getValue());
+            if (System.getProperty(entry.getKey()) == null) {
+                System.setProperty(entry.getKey(), entry.getValue());
+                System.out.println("Loaded env: " + entry.getKey() + "=" + entry.getValue());
+            }
         });
     }
 }
