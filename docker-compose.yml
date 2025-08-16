@@ -1,0 +1,37 @@
+services:
+  wallet-db:
+    image: postgres:16
+    restart: always
+    container_name: wallet-postgres
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+  wallet-app:
+    build: .
+    image: wallet-backend
+    container_name: wallet-backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./.env:/app/.env
+      - ./logs:/app/logs
+      - ./gradle-cache:/root/.gradle
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+    depends_on:
+      - wallet-db
+
+volumes:
+  postgres-data:

@@ -1,9 +1,9 @@
 package org.example.wallet.mapper;
 
-import org.example.wallet.dto.OperationType;
 import org.example.wallet.dto.WalletBalanceDTO;
 import org.example.wallet.dto.WalletOperationDTO;
 import org.example.wallet.model.Wallet;
+
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -21,7 +21,6 @@ public class WalletMapper {
 
     public Wallet toEntity(WalletOperationDTO dto) {
         return Wallet.builder()
-                .id(dto.walletId())
                 .balance(BigDecimal.ZERO)
                 .build();
     }

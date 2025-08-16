@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/wallet
-    username: wallet
-    password: password
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -11,6 +11,25 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+
+  # Пример возможных полей для динамической настройки через /refresh)
+  #wallet:
+  #  limits:
+  #    max-transfer: ${MAX_TRANSFER:10000}  # Значение по умолчанию: 10000
+  #    min-transfer: ${MIN_TRANSFER:10}
+  #  fees:
+  #    deposit-percent: ${DEPOSIT_FEE:0.5}
+  #    withdraw-percent: ${WITHDRAW_FEE:1.0}
+  #  features:
+  #    enable-crypto: ${ENABLE_CRYPTO:false}  # Флаг функциональности
+  #
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health, info, refresh
 
 server:
   port: 8080

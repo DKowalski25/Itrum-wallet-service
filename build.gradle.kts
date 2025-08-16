@@ -36,6 +36,18 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 
+    implementation("org.springframework.retry:spring-retry")
+
+    implementation("io.github.cdimascio:dotenv-java:3.0.0")
+
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    testImplementation("com.h2database:h2")
+
+    testImplementation("org.springframework.security:spring-security-test")
+
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
 }
 
 tasks.test {
