@@ -40,8 +40,6 @@ dependencies {
 
     implementation("io.github.cdimascio:dotenv-java:3.0.0")
 
-    implementation("org.liquibase:liquibase-core")
-
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
 }
