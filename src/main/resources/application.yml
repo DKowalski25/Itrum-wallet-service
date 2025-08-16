@@ -11,6 +11,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+    parameters:
+      searchPath: classpath:db/changelog/
 
 server:
   port: 8080
