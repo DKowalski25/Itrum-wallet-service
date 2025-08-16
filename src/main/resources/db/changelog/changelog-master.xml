@@ -5,5 +5,5 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.19.xsd">
 
-    <include file="entities/wallet/v1__initial_wallet.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/entities/wallet/v1__initial_wallet.xml"/>
 </databaseChangeLog>
