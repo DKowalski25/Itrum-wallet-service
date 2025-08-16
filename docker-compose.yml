@@ -1,32 +1,37 @@
 services:
-  wallet-app:
-    build: .
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./.env:/app/.env
-      - ./config:/app/config:ro
-      - ./logs:/app/logs
-    environment:
-      - SPRING_PROFILES_ACTIVE=dev
-    depends_on:
-        wallet-db:
-          condition: service_healthy
-    restart: unless-stopped
-
   wallet-db:
     image: postgres:16
-    env_file: .env
+    restart: always
+    container_name: wallet-postgres
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - wallet-db-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     ports:
       - "5434:5432"
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
+
+  wallet-app:
+    build: .
+    image: wallet-backend
+    container_name: wallet-backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./.env:/app/.env
+      - ./logs:/app/logs
+      - ./gradle-cache:/root/.gradle
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+    depends_on:
+      - wallet-db
 
 volumes:
-  wallet-db-data:
+  postgres-data:
