@@ -1,6 +1,5 @@
 package org.example.wallet;
 
-import org.example.wallet.util.EnvLoader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
