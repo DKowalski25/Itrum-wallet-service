@@ -2,7 +2,6 @@ package org.example.wallet.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.example.wallet.config.TestSecurityConfig;
 import org.example.wallet.dto.OperationType;
 import org.example.wallet.dto.WalletOperationDTO;
 import org.example.wallet.model.Wallet;
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@Import(TestSecurityConfig.class)
 class WalletIntegrationTest {
 
     @Autowired

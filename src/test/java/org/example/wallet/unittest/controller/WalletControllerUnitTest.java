@@ -2,7 +2,6 @@ package org.example.wallet.unittest.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.example.wallet.config.TestSecurityConfig;
 import org.example.wallet.config.TestWalletConfig;
 import org.example.wallet.controller.wallet.WalletControllerImpl;
 import org.example.wallet.dto.OperationType;
@@ -16,6 +15,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -27,20 +27,19 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
-
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(WalletControllerImpl.class)
-@Import(value = {TestSecurityConfig.class, TestWalletConfig.class})
+@Import(value = {TestWalletConfig.class})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @EnableAutoConfiguration(exclude = {
         DataSourceAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class
 })
+@AutoConfigureMockMvc(addFilters = false)
 class WalletControllerUnitTest {
 
     @Autowired
